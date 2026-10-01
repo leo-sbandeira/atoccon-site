@@ -247,6 +247,16 @@ dialog form button{background:#fff;border:0;border-radius:8px;padding:8px 16px;f
 .prose ul{margin:0 0 1.1em;padding-left:1.2em}
 .prose li{margin-bottom:.5em}
 .newsphoto{display:block;border-radius:12px;border:1px solid var(--line);margin:18px 0;width:100%;max-width:760px;height:auto}
+.newslist{display:grid;gap:18px}
+.newsrow{display:grid;grid-template-columns:340px 1fr;height:230px;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit}
+.newsrow .thumb{width:100%;height:100%;background-color:var(--soft);background-repeat:no-repeat}
+.newsrow .nr-tx{padding:22px 28px;display:flex;flex-direction:column;justify-content:center;gap:8px;min-width:0}
+.newsrow time{font-size:14px;color:var(--muted);font-weight:500}
+.newsrow h3{margin:0;font-size:1.45rem;line-height:1.2;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.newsrow p{margin:0;color:var(--muted);font-size:16px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.newsrow:hover h3{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold);text-decoration-thickness:2px}
+.newsrow .thumb.paper{display:grid;align-content:center;justify-items:start;gap:4px;padding:0 9%;background:#14252D;color:#fff;border-left:6px solid var(--gold)}
+@media (max-width:760px){.newsrow{grid-template-columns:1fr;height:auto}.newsrow .thumb{height:auto;aspect-ratio:3/2}.newsrow .nr-tx{padding:18px 20px 22px}}
 .posters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0;align-items:start}
 .posters img{border-radius:12px;border:1px solid var(--line);margin:0;width:100%;height:auto}
 .article .ph{border-radius:12px;margin:18px 0;aspect-ratio:16/9;background:#fff center/contain no-repeat;border:1px solid var(--line)}
@@ -329,7 +339,7 @@ footer .legal{border-top:1px solid rgba(255,255,255,.15);margin-top:36px;padding
   <section class="block">
     <div class="wrap">
       <div class="head-row"><h2>Notícias recentes</h2><a class="btn line" href="#/noticias">Ver todas as notícias</a></div>
-      <div class="news-grid" id="homeNews"></div>
+      <div class="newslist" id="homeNews"></div>
     </div>
   </section>
 
@@ -690,12 +700,15 @@ const imgOf = n => A[n.cover||(n.imgs?n.imgs[0]:n.img)];
 const phStyle = n => n.poster ? `style="background-image:url(${imgOf(n)});background-size:contain;background-position:center;background-color:#e9eef0"` : n.logo ? `style="background-image:url(${imgOf(n)})" ` : n.contain ? `style="background-image:url(${imgOf(n)});background-size:contain;background-color:#eef2f0" ` : `style="background-image:url(${imgOf(n)})" `;
 const phHtml = n => n.paper ? `<div class="ph paper"><small>${n.kicker||'Revista Abracicon Saber'}</small><b>${n.paper}</b><span>${n.paperSub}</span></div>` : `<div class="ph ${n.logo?'logo':''}" ${phStyle(n)}></div>`;
 const card = (n,cls)=>`<a class="card ${cls}" href="#/noticias" data-n="${n.id}">${phHtml(n)}<div class="tx"><time>${n.label}</time><h3>${n.title}</h3>${cls==='big'?`<p class="muted" style="margin:0">${n.sum}</p>`:''}</div></a>`;
-$('#homeNews').innerHTML = card(NEWS[0],'big') + `<div class="stack">${card(NEWS[1],'row')}${card(NEWS[2],'row')}</div>`;
+const thumbStyle = n => { const src=imgOf(n); if(n.logo) return `style="background-image:url(${src});background-size:45%;background-repeat:no-repeat;background-position:center;background-color:#fff"`; return `style="background-image:url(${src});background-size:cover;background-position:${n.poster?'top center':'center'}"`; };
+const thumbHtml = n => n.paper ? `<div class="thumb paper"><small>${n.kicker||'Revista Abracicon Saber'}</small><b>${n.paper}</b><span>${n.paperSub}</span></div>` : `<div class="thumb" ${thumbStyle(n)} role="img" aria-label="${(n.alt||n.title).replace(/"/g,'&quot;')}"></div>`;
+const newsRow = n => `<a class="newsrow" href="#/noticias" data-n="${n.id}">${thumbHtml(n)}<div class="nr-tx"><time>${n.label}</time><h3>${n.title}</h3><p>${n.sum}</p></div></a>`;
+$('#homeNews').innerHTML = NEWS.slice(0,5).map(newsRow).join('');
 const media = n => n.photo ? `<img class="newsphoto" src="${A[n.img]}" alt="${n.alt||n.title}" loading="lazy">` : n.poster ? `<div class="posters">${n.imgs.map(k=>`<img src="${A[k]}" alt="Cartaz de divulgação: ${n.title}" loading="lazy">`).join('')}</div>` : n.paper ? `<div class="paperbox"><small>${n.kicker||'Revista Abracicon Saber'}</small><b>${n.paper}</b><span>${n.paperSub}</span></div>` : `<div class="ph" style="background-image:url(${imgOf(n)});${n.logo?'background-size:30%':n.contain?'background-size:contain;background-color:#eef2f0':'background-size:cover'}"></div>`;
 const bodyHtml = n => n.body.map(p=>typeof p==='string'?`<p>${p}</p>`:`<ul>${p.list.map(li=>`<li>${li}</li>`).join('')}</ul>`).join('');
 const linkHtml = n => n.link ? `<p><a class="btn line" href="${n.link}" target="_blank" rel="noopener">Ler o artigo na Abracicon Saber</a></p>` : '';
 $('#newsList').innerHTML = NEWS.map(n=>`<article class="article" id="n-${n.id}"><time class="muted">${n.label}</time><h2>${n.title}</h2>${media(n)}<div class="prose">${bodyHtml(n)}</div>${linkHtml(n)}</article>`).join('');
-$$('#homeNews .card').forEach(c=>c.addEventListener('click',e=>{e.preventDefault();location.hash='#/noticias';setTimeout(()=>{const el=document.getElementById('n-'+c.dataset.n);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},60);}));
+$$('#homeNews .newsrow').forEach(c=>c.addEventListener('click',e=>{e.preventDefault();location.hash='#/noticias';setTimeout(()=>{const el=document.getElementById('n-'+c.dataset.n);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},60);}));
 
 /* diretoria */
 const initials = n => n.split(' ').filter(w=>w.length>2)[0][0];
