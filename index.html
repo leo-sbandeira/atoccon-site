@@ -257,6 +257,11 @@ dialog form button{background:#fff;border:0;border-radius:8px;padding:8px 16px;f
 .newsrow:hover h3{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold);text-decoration-thickness:2px}
 .newsrow .thumb.paper{display:grid;align-content:center;justify-items:start;gap:4px;padding:0 9%;background:#14252D;color:#fff;border-left:6px solid var(--gold)}
 @media (max-width:760px){.newsrow{grid-template-columns:1fr;height:auto}.newsrow .thumb{height:auto;aspect-ratio:3/2}.newsrow .nr-tx{padding:18px 20px 22px}}
+h1.ntitle{font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:30ch;line-height:1.12}
+.ndate{margin:16px 0 0;color:var(--muted);font-weight:500}
+.share{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:30px 0 0;padding-top:22px;border-top:1px solid var(--line);max-width:760px}
+.share span{font-weight:600;margin-right:6px}
+.share .btn{padding:9px 18px;font-size:15px}
 .posters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0;align-items:start}
 .posters img{border-radius:12px;border:1px solid var(--line);margin:0;width:100%;height:auto}
 .article .ph{border-radius:12px;margin:18px 0;aspect-ratio:16/9;background:#fff center/contain no-repeat;border:1px solid var(--line)}
@@ -583,6 +588,12 @@ footer .legal{border-top:1px solid rgba(255,255,255,.15);margin-top:36px;padding
   <div class="pagebody"><div class="wrap" id="newsList"></div></div>
 </div>
 
+<!-- NOTÍCIA (página individual) -->
+<div class="page" data-page="noticia" data-title="Notícia">
+  <div class="pagehead"><div class="wrap"><div class="crumb"><a href="#/noticias">Notícias</a></div><h1 class="ntitle" id="nTitle"></h1><p class="ndate" id="nDate"></p></div></div>
+  <div class="pagebody"><div class="wrap"><article id="nBody"></article></div></div>
+</div>
+
 </main>
 
 <footer>
@@ -618,42 +629,149 @@ const A = {"logo_h": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4QAAAFqCAYA
 const CAD = [{"n": 1, "vac": false, "patrono": "Juscelino Carvalho de Brito", "ocupante": "Juscelino Carvalho de Brito"}, {"n": 2, "vac": false, "patrono": "Marli Terezinha Vieira", "ocupante": "Marli Terezinha Vieira"}, {"n": 3, "vac": false, "patrono": "Sônia Lima da Costa", "ocupante": "Sônia Lima da Costa"}, {"n": 4, "vac": false, "patrono": "Gilberto Gomes de Amorim", "ocupante": "Gilberto Gomes de Amorim"}, {"n": 5, "vac": false, "patrono": "Vilmar Custodio Biangulo", "ocupante": "Vilmar Custodio Biangulo"}, {"n": 6, "vac": false, "patrono": "Washington Moura Leal", "ocupante": "Washington Moura Leal"}, {"n": 7, "vac": true, "patrono": "Carlos Vicente Berner", "mem": true}, {"n": 8, "vac": false, "patrono": "Elizabeth Vieira dos Reis", "ocupante": "Elizabeth Vieira dos Reis"}, {"n": 9, "vac": true, "patrono": "", "mem": false}, {"n": 10, "vac": false, "patrono": "Rúbia Caetano Cardoso", "ocupante": "Rúbia Caetano Cardoso"}, {"n": 11, "vac": false, "patrono": "Cláudia da Luz Carvelli", "ocupante": "Cláudia da Luz Carvelli"}, {"n": 12, "vac": false, "patrono": "Edvan Barreira Gomes", "ocupante": "Edvan Barreira Gomes"}, {"n": 13, "vac": false, "patrono": "Karrário Ferreira da Silva", "ocupante": "Karrário Ferreira da Silva"}, {"n": 14, "vac": false, "patrono": "Marcos Antonio Oliveira da Cruz", "ocupante": "Marcos Antonio Oliveira da Cruz"}, {"n": 15, "vac": false, "patrono": "Alessandra Martins Correia", "ocupante": "Alessandra Martins Correia"}, {"n": 16, "vac": true, "patrono": "", "mem": false}, {"n": 17, "vac": false, "patrono": "Iracy Martins Amorim", "ocupante": "Iracy Martins Amorim"}, {"n": 18, "vac": false, "patrono": "Patricia Pinheiro Alves Feitosa", "ocupante": "Patricia Pinheiro Alves Feitosa"}, {"n": 19, "vac": false, "patrono": "Jônatas Soares de Araújo", "ocupante": "Jônatas Soares de Araújo"}, {"n": 20, "vac": false, "patrono": "Luciano Gomes Gonçalves", "ocupante": "Luciano Gomes Gonçalves"}, {"n": 21, "vac": true, "patrono": "", "mem": false}, {"n": 22, "vac": false, "patrono": "Lidiane dos Santos Silva", "ocupante": "Lidiane dos Santos Silva"}, {"n": 23, "vac": false, "patrono": "Eendrik Lima Gomes", "ocupante": "Eendrik Lima Gomes"}, {"n": 24, "vac": false, "patrono": "Mônica de Souza Lima", "ocupante": "Mônica de Souza Lima"}, {"n": 25, "vac": true, "patrono": "", "mem": false}, {"n": 26, "vac": false, "patrono": "Adriano Barreira De Andrade", "ocupante": "Adriano Barreira De Andrade"}, {"n": 27, "vac": true, "patrono": "", "mem": false}, {"n": 28, "vac": false, "patrono": "Gisele Leite Padilha", "ocupante": "Gisele Leite Padilha"}, {"n": 29, "vac": false, "patrono": "Clarete de Itoz", "ocupante": "Clarete de Itoz"}, {"n": 30, "vac": false, "patrono": "Leonardo dos Santos Bandeira", "ocupante": "Leonardo dos Santos Bandeira"}];
 
 const NEWS = [
- {id:'saberes',d:'2022',date:'2022',label:'2022',title:'Livro Saberes Contábeis reúne pesquisas de acadêmicos e colaboradores',img:'capa',contain:true,
-  sum:'Obra organizada por acadêmicos da ATOCCON traz nove capítulos de pesquisa em contabilidade.',
-  body:['A ATOCCON publicou em 2022 o livro Saberes Contábeis: disseminando o conhecimento técnico e científico, fruto de pesquisas na área contábil impulsionadas pela academia.','A obra foi organizada por Marli Terezinha Vieira, Carlos Vicente Berner, Gisele Leite Padilha e Lidiane dos Santos Silva, e reúne nove capítulos que vão de reportes ESG a marketing de relacionamento, passando por contabilidade gerencial, mercado de ações e desempenho ambiental.','O livro é um e-book em PDF, publicado pela VirtualBooks Editora (ISBN 978-65-5606-299-0).']},
- {id:'posse',d:'2019-06-28',date:'2019-06-28',label:'28 de junho de 2019',title:'ATOCCON é lançada em solenidade com a posse dos primeiros acadêmicos',img:'posse2',
-  sum:'Cerimônia na sede do CRC-TO empossou 27 acadêmicos, a diretoria e o conselho fiscal.',
-  body:['A Academia Tocantinense de Ciências Contábeis foi lançada em solenidade realizada na sede do Conselho Regional de Contabilidade do Tocantins, em Palmas. Na cerimônia tomaram posse 27 acadêmicos, além da diretoria e do conselho fiscal.','Eendrik Lima Gomes foi empossado como acadêmico e presidente da ATOCCON, na cátedra de número 23. A sessão solene foi aberta por Gardênia Maria Braga de Carvalho, representante da Academia Brasileira de Ciências Contábeis (Abracicon).','Os acadêmicos foram escolhidos em escrutínio específico, exigindo-se formação em Ciências Contábeis, notório conhecimento científico e reputação ilibada.']},
- {id:'estatuto',d:'2019-02-26',date:'2019-02-26',label:'26 de fevereiro de 2019',title:'Assembleia Geral de fundação aprova o Estatuto Social da ATOCCON',img:'logo_mark',logo:true,
-  sum:'Estatuto define 30 cátedras, objetivos e a estrutura de diretoria e conselho fiscal.',
-  body:['Em Assembleia Geral realizada em Palmas, em 26 de fevereiro de 2019, foi aprovado o Estatuto Social da ATOCCON.','O documento estabelece que a academia será formada por acadêmicos fundadores e efetivos, em 30 cátedras, e define seus objetivos, os direitos e deveres dos acadêmicos e a estrutura de diretoria, conselho fiscal e assembleia geral.']}
+ {
+  "id": "capacitacao-novas-diretrizes-curriculares",
+  "d": "2025-10-13",
+  "label": "Junho a outubro de 2025",
+  "poster": true,
+  "imgs": [
+   "n_crcto",
+   "n_ufto",
+   "n_priv"
+  ],
+  "cover": "n_priv",
+  "title": "ATOCCON e CRCTO realizam capacitação sobre as novas diretrizes curriculares do curso de Ciências Contábeis",
+  "sum": "Série de encontros no auditório do CRCTO apresenta as novas DCNs a coordenadores e NDEs de instituições de ensino do Tocantins.",
+  "body": [
+   "A ATOCCON e o Conselho Regional de Contabilidade do Tocantins (CRCTO), em parceria com o Conselho Federal de Contabilidade (CFC) e a Abracicon, promoveram a capacitação “Contabilidade em Transformação: Novas Diretrizes e o Futuro da Formação Profissional”, voltada a coordenadores e Núcleos Docentes Estruturantes (NDEs) dos cursos de Ciências Contábeis.",
+   "Os encontros repassaram a capacitação sobre as Novas Diretrizes Curriculares Nacionais promovida pelo CFC em Brasília e foram conduzidos por Lidiane dos Santos Silva, presidente da ATOCCON, e pelo professor Victor de Oliveira, do CRCTO. Todos aconteceram no auditório do CRCTO, em Palmas:",
+   {
+    "list": [
+     "6 de junho de 2025, sexta-feira, às 15h: coordenadores e NDEs dos cursos de Ciências Contábeis da Unitins.",
+     "19 de setembro de 2025, sexta-feira, às 9h: UFT e UNIRG, para conversar sobre o Projeto Pedagógico do Curso.",
+     "16 de outubro de 2025, quinta-feira, às 9h: faculdades, centros universitários e universidades privadas, para verificar as mudanças nos Projetos Pedagógicos de Curso (PPCs)."
+    ]
+   }
+  ]
+ },
+ {
+  "id": "artigo-novas-dcns-metodologias-ativas",
+  "d": "2025-08-22",
+  "label": "Edição 52, maio a julho de 2025",
+  "img": "n_dcn",
+  "photo": true,
+  "contain": true,
+  "alt": "Abertura do artigo Convergência para o futuro na Revista Abracicon Saber, edição 52",
+  "link": "https://abracicon.org/abracicon_saber/convergencia-para-o-futuro-as-novas-dcns-e-o-papel-transformador-das-metodologias-ativas-no-ensino-contabil/",
+  "title": "Artigo da presidente da ATOCCON discute as novas DCNs e as metodologias ativas no ensino contábil",
+  "sum": "Lidiane dos Santos Silva publica na Revista Abracicon Saber, edição 52.",
+  "body": [
+   "A presidente da ATOCCON, Lidiane dos Santos Silva, publicou na Revista Abracicon Saber, edição 52 (maio a julho de 2025), o artigo “Convergência para o futuro: as novas DCNs e o papel transformador das metodologias ativas no ensino contábil”.",
+   "O trabalho analisa como as competências e habilidades previstas nas novas Diretrizes Curriculares Nacionais do curso de Ciências Contábeis, instituídas pela Resolução CNE/CES nº 1, de 27 de março de 2024, pedem inovação pedagógica, com destaque para as metodologias ativas de aprendizagem. A abordagem é qualitativa e exploratória, e discute o perfil do egresso e a organização curricular.",
+   "Segundo o estudo, as novas DCNs impulsionam a modernização do ensino contábil e exigem das instituições de ensino superior uma reestruturação que favoreça a aprendizagem ativa."
+  ]
+ },
+ {
+  "id": "comissao-de-educacao-do-crcto",
+  "d": "2025-04-14",
+  "label": "14 de abril de 2025",
+  "img": "n_sede",
+  "photo": true,
+  "alt": "Sede do Conselho Regional de Contabilidade do Tocantins (CRCTO), em Palmas",
+  "title": "Cinco acadêmicos da ATOCCON são nomeados para a Comissão de Educação do CRCTO",
+  "sum": "Lidiane dos Santos Silva, presidente da ATOCCON, é a coordenadora da comissão.",
+  "body": [
+   "O Conselho Regional de Contabilidade do Tocantins (CRCTO) instituiu a Comissão de Educação pela Portaria nº 08/2025, de 14 de abril de 2025, com o objetivo de fomentar a educação no ensino superior do curso de Ciências Contábeis e de elaborar atividades que promovam a educação.",
+   "A presidente da ATOCCON, Lidiane dos Santos Silva, foi nomeada coordenadora da comissão.",
+   "Os acadêmicos da ATOCCON Leonardo dos Santos Bandeira, Gisele Leite Padilha e Clarete de Itoz são membros efetivos, ao lado do professor Victor de Oliveira. Entre os suplentes está a acadêmica Mônica de Souza Lima, junto com Andrea Pereira da Conceição, Doriane Braga Nunes Bilac, Ailda Viana de Sousa Martins e Jeová Brito Silva."
+  ]
+ },
+ {
+  "id": "i-forum-nacional-agocicon",
+  "d": "2024-11-23",
+  "label": "Novembro de 2024",
+  "poster": true,
+  "imgs": [
+   "n_forum1",
+   "n_forum2"
+  ],
+  "title": "Presidente da ATOCCON integra a programação do I Fórum Nacional da AGOCICON",
+  "sum": "Lidiane dos Santos Silva é especialista no painel sobre a matriz curricular do curso de Ciências Contábeis.",
+  "body": [
+   "A presidente da ATOCCON, Lidiane dos Santos Silva, integrou a programação do I Fórum Nacional da AGOCICON, que teve como tema “Valorização do Conhecimento Científico na Ciência Contábil”, com transmissão ao vivo no canal da AGOCICON no YouTube.",
+   "Ela foi a especialista do Painel II, “Matriz Curricular do curso de Ciências Contábeis”, das 14h30 às 15h30, com mediação de Valdir Mendonça Alves. O evento teve realização da AGOCICON e apoio da Abracicon, do CRCGO, do PPGCONT, da FACE e da UFG.",
+   "A participação da ATOCCON teve como foco orientar a elaboração dos Projetos Pedagógicos de Curso para atender às novas Diretrizes Curriculares Nacionais."
+  ]
+ },
+ {
+  "id": "artigo-educacao-desenvolvimento-sustentavel",
+  "d": "2024-03-12",
+  "label": "Edição 46, novembro de 2023 a janeiro de 2024",
+  "img": "n_eds",
+  "photo": true,
+  "contain": true,
+  "alt": "Abertura do artigo Essa terra é nossa na Revista Abracicon Saber, edição 46",
+  "link": "https://abracicon.org/abracicon_saber/essa-terra-e-nossa-a-educacao-para-o-desenvolvimento-sustentavel-nos-cursos-de-ciencias-contabeis-do-tocantins/",
+  "title": "Estudo sobre Educação para o Desenvolvimento Sustentável nos cursos de Ciências Contábeis do Tocantins é publicado na Abracicon Saber",
+  "sum": "Artigo de Leonardo dos Santos Bandeira, Lidiane dos Santos Silva e coautores analisa os projetos pedagógicos de cinco instituições do estado.",
+  "body": [
+   "A Revista Abracicon Saber, edição 46 (novembro e dezembro de 2023 e janeiro de 2024), publicou o artigo “Essa terra é nossa: a Educação para o Desenvolvimento Sustentável nos cursos de Ciências Contábeis do Tocantins”, de autoria de Leonardo dos Santos Bandeira, Flaviane Matos de Queiroz, Hérika Ribeiro dos Santos, Lidiane dos Santos Silva e Otília Paiva Nunes Alves. Leonardo e Lidiane são acadêmicos da ATOCCON.",
+   "O estudo analisa o conteúdo dos Projetos Pedagógicos de Curso de cinco instituições do estado para identificar como a Educação para o Desenvolvimento Sustentável (EDS) aparece nas propostas pedagógicas.",
+   "Os resultados mostram que a EDS está presente sobretudo no ensino. Na pesquisa, três instituições têm linhas e grupos que fomentam o tema; na extensão, não foram identificadas propostas amplas; e na gestão, todas as instituições preveem em sua missão, visão ou valores uma formação voltada ao desenvolvimento sustentável e às práticas socioambientais."
+  ]
+ },
+ {
+  "id": "livro-saberes-contabeis",
+  "d": "2022",
+  "date": "2022",
+  "label": "2022",
+  "title": "Livro Saberes Contábeis reúne pesquisas de acadêmicos e colaboradores",
+  "img": "capa",
+  "contain": true,
+  "sum": "Obra organizada por acadêmicos da ATOCCON traz nove capítulos de pesquisa em contabilidade.",
+  "body": [
+   "A ATOCCON publicou em 2022 o livro Saberes Contábeis: disseminando o conhecimento técnico e científico, fruto de pesquisas na área contábil impulsionadas pela academia.",
+   "A obra foi organizada por Marli Terezinha Vieira, Carlos Vicente Berner, Gisele Leite Padilha e Lidiane dos Santos Silva, e reúne nove capítulos que vão de reportes ESG a marketing de relacionamento, passando por contabilidade gerencial, mercado de ações e desempenho ambiental.",
+   "O livro é um e-book em PDF, publicado pela VirtualBooks Editora (ISBN 978-65-5606-299-0)."
+  ],
+  "photo": true,
+  "max": 320,
+  "alt": "Capa do livro Saberes Contábeis"
+ },
+ {
+  "id": "lancamento-e-posse-dos-primeiros-academicos",
+  "d": "2019-06-28",
+  "date": "2019-06-28",
+  "label": "28 de junho de 2019",
+  "title": "ATOCCON é lançada em solenidade com a posse dos primeiros acadêmicos",
+  "img": "posse2",
+  "sum": "Cerimônia na sede do CRC-TO empossou 27 acadêmicos, a diretoria e o conselho fiscal.",
+  "body": [
+   "A Academia Tocantinense de Ciências Contábeis foi lançada em solenidade realizada na sede do Conselho Regional de Contabilidade do Tocantins, em Palmas. Na cerimônia tomaram posse 27 acadêmicos, além da diretoria e do conselho fiscal.",
+   "Eendrik Lima Gomes foi empossado como acadêmico e presidente da ATOCCON, na cátedra de número 23. A sessão solene foi aberta por Gardênia Maria Braga de Carvalho, representante da Academia Brasileira de Ciências Contábeis (Abracicon).",
+   "Os acadêmicos foram escolhidos em escrutínio específico, exigindo-se formação em Ciências Contábeis, notório conhecimento científico e reputação ilibada."
+  ],
+  "photo": true,
+  "alt": "Solenidade de lançamento e posse dos acadêmicos da ATOCCON, em 2019"
+ },
+ {
+  "id": "aprovacao-do-estatuto-social",
+  "d": "2019-02-26",
+  "date": "2019-02-26",
+  "label": "26 de fevereiro de 2019",
+  "title": "Assembleia Geral de fundação aprova o Estatuto Social da ATOCCON",
+  "img": "logo_mark",
+  "logo": true,
+  "sum": "Estatuto define 30 cátedras, objetivos e a estrutura de diretoria e conselho fiscal.",
+  "body": [
+   "Em Assembleia Geral realizada em Palmas, em 26 de fevereiro de 2019, foi aprovado o Estatuto Social da ATOCCON.",
+   "O documento estabelece que a academia será formada por acadêmicos fundadores e efetivos, em 30 cátedras, e define seus objetivos, os direitos e deveres dos acadêmicos e a estrutura de diretoria, conselho fiscal e assembleia geral."
+  ],
+  "photo": true,
+  "max": 220,
+  "alt": "Marca da ATOCCON"
+ }
 ];
-const NEWS_NEW = [
- {id:'cap-dcn',d:'2025-10-13',label:'Junho a outubro de 2025',poster:true,imgs:['n_crcto','n_ufto','n_priv'],cover:'n_priv',
-  title:'ATOCCON e CRCTO realizam capacitação sobre as novas diretrizes curriculares do curso de Ciências Contábeis',
-  sum:'Série de encontros no auditório do CRCTO apresenta as novas DCNs a coordenadores e NDEs de instituições de ensino do Tocantins.',
-  body:['A ATOCCON e o Conselho Regional de Contabilidade do Tocantins (CRCTO), em parceria com o Conselho Federal de Contabilidade (CFC) e a Abracicon, promoveram a capacitação “Contabilidade em Transformação: Novas Diretrizes e o Futuro da Formação Profissional”, voltada a coordenadores e Núcleos Docentes Estruturantes (NDEs) dos cursos de Ciências Contábeis.','Os encontros repassaram a capacitação sobre as Novas Diretrizes Curriculares Nacionais promovida pelo CFC em Brasília e foram conduzidos por Lidiane dos Santos Silva, presidente da ATOCCON, e pelo professor Victor de Oliveira, do CRCTO. Todos aconteceram no auditório do CRCTO, em Palmas:',
-   {list:['6 de junho de 2025, sexta-feira, às 15h: coordenadores e NDEs dos cursos de Ciências Contábeis da Unitins.','19 de setembro de 2025, sexta-feira, às 9h: UFT e UNIRG, para conversar sobre o Projeto Pedagógico do Curso.','16 de outubro de 2025, quinta-feira, às 9h: faculdades, centros universitários e universidades privadas, para verificar as mudanças nos Projetos Pedagógicos de Curso (PPCs).']}]},
- {id:'comissao-educacao',d:'2025-04-14',label:'14 de abril de 2025',img:'n_sede',photo:true,alt:'Sede do Conselho Regional de Contabilidade do Tocantins (CRCTO), em Palmas',
-  title:'Cinco acadêmicos da ATOCCON são nomeados para a Comissão de Educação do CRCTO',
-  sum:'Lidiane dos Santos Silva, presidente da ATOCCON, é a coordenadora da comissão.',
-  body:['O Conselho Regional de Contabilidade do Tocantins (CRCTO) instituiu a Comissão de Educação pela Portaria nº 08/2025, de 14 de abril de 2025, com o objetivo de fomentar a educação no ensino superior do curso de Ciências Contábeis e de elaborar atividades que promovam a educação.','A presidente da ATOCCON, Lidiane dos Santos Silva, foi nomeada coordenadora da comissão.','Os acadêmicos da ATOCCON Leonardo dos Santos Bandeira, Gisele Leite Padilha e Clarete de Itoz são membros efetivos, ao lado do professor Victor de Oliveira. Entre os suplentes está a acadêmica Mônica de Souza Lima, junto com Andrea Pereira da Conceição, Doriane Braga Nunes Bilac, Ailda Viana de Sousa Martins e Jeová Brito Silva.']},
- {id:'forum-agocicon',d:'2024-11-23',label:'Novembro de 2024',poster:true,imgs:['n_forum1','n_forum2'],
-  title:'Presidente da ATOCCON integra a programação do I Fórum Nacional da AGOCICON',
-  sum:'Lidiane dos Santos Silva é especialista no painel sobre a matriz curricular do curso de Ciências Contábeis.',
-  body:['A presidente da ATOCCON, Lidiane dos Santos Silva, integrou a programação do I Fórum Nacional da AGOCICON, que teve como tema “Valorização do Conhecimento Científico na Ciência Contábil”, com transmissão ao vivo no canal da AGOCICON no YouTube.','Ela foi a especialista do Painel II, “Matriz Curricular do curso de Ciências Contábeis”, das 14h30 às 15h30, com mediação de Valdir Mendonça Alves. O evento teve realização da AGOCICON e apoio da Abracicon, do CRCGO, do PPGCONT, da FACE e da UFG.','A participação da ATOCCON teve como foco orientar a elaboração dos Projetos Pedagógicos de Curso para atender às novas Diretrizes Curriculares Nacionais.']},
- {id:'artigo-dcn',d:'2025-08-22',label:'Edição 52, maio a julho de 2025',img:'n_dcn',photo:true,contain:true,alt:'Abertura do artigo Convergência para o futuro na Revista Abracicon Saber, edição 52',
-  link:'https://abracicon.org/abracicon_saber/convergencia-para-o-futuro-as-novas-dcns-e-o-papel-transformador-das-metodologias-ativas-no-ensino-contabil/',
-  title:'Artigo da presidente da ATOCCON discute as novas DCNs e as metodologias ativas no ensino contábil',
-  sum:'Lidiane dos Santos Silva publica na Revista Abracicon Saber, edição 52.',
-  body:['A presidente da ATOCCON, Lidiane dos Santos Silva, publicou na Revista Abracicon Saber, edição 52 (maio a julho de 2025), o artigo “Convergência para o futuro: as novas DCNs e o papel transformador das metodologias ativas no ensino contábil”.','O trabalho analisa como as competências e habilidades previstas nas novas Diretrizes Curriculares Nacionais do curso de Ciências Contábeis, instituídas pela Resolução CNE/CES nº 1, de 27 de março de 2024, pedem inovação pedagógica, com destaque para as metodologias ativas de aprendizagem. A abordagem é qualitativa e exploratória, e discute o perfil do egresso e a organização curricular.','Segundo o estudo, as novas DCNs impulsionam a modernização do ensino contábil e exigem das instituições de ensino superior uma reestruturação que favoreça a aprendizagem ativa.']},
- {id:'artigo-eds',d:'2024-03-12',label:'Edição 46, novembro de 2023 a janeiro de 2024',img:'n_eds',photo:true,contain:true,alt:'Abertura do artigo Essa terra é nossa na Revista Abracicon Saber, edição 46',
-  link:'https://abracicon.org/abracicon_saber/essa-terra-e-nossa-a-educacao-para-o-desenvolvimento-sustentavel-nos-cursos-de-ciencias-contabeis-do-tocantins/',
-  title:'Estudo sobre Educação para o Desenvolvimento Sustentável nos cursos de Ciências Contábeis do Tocantins é publicado na Abracicon Saber',
-  sum:'Artigo de Leonardo dos Santos Bandeira, Lidiane dos Santos Silva e coautores analisa os projetos pedagógicos de cinco instituições do estado.',
-  body:['A Revista Abracicon Saber, edição 46 (novembro e dezembro de 2023 e janeiro de 2024), publicou o artigo “Essa terra é nossa: a Educação para o Desenvolvimento Sustentável nos cursos de Ciências Contábeis do Tocantins”, de autoria de Leonardo dos Santos Bandeira, Flaviane Matos de Queiroz, Hérika Ribeiro dos Santos, Lidiane dos Santos Silva e Otília Paiva Nunes Alves. Leonardo e Lidiane são acadêmicos da ATOCCON.','O estudo analisa o conteúdo dos Projetos Pedagógicos de Curso de cinco instituições do estado para identificar como a Educação para o Desenvolvimento Sustentável (EDS) aparece nas propostas pedagógicas.','Os resultados mostram que a EDS está presente sobretudo no ensino. Na pesquisa, três instituições têm linhas e grupos que fomentam o tema; na extensão, não foram identificadas propostas amplas; e na gestão, todas as instituições preveem em sua missão, visão ou valores uma formação voltada ao desenvolvimento sustentável e às práticas socioambientais.']}
-];
-NEWS.push(...NEWS_NEW); NEWS.sort((a,b)=>b.d.localeCompare(a.d));
 const DIR23 = [
  {n:'Lidiane dos Santos Silva',r:'1ª Presidente',c:22,p:'p22'},
  {n:'Gisele Leite Padilha',r:'2ª Presidente',c:28,p:'p28'},
@@ -696,19 +814,32 @@ $$('[data-bg]').forEach(i=>i.style.backgroundImage=`url(${A[i.dataset.bg]})`);
 $('#heroBg').style.backgroundImage=`url(${A.posse1})`;
 
 /* notícias */
+const PROD = true;
+const SITE = 'https://atoccon.org.br';
+const newsHref = id => PROD ? 'noticias/'+id+'/' : '#/noticias/'+id;
+const newsUrl = id => PROD ? SITE+'/noticias/'+id+'/' : location.href.split('#')[0]+'#/noticias/'+id;
 const imgOf = n => A[n.cover||(n.imgs?n.imgs[0]:n.img)];
-const phStyle = n => n.poster ? `style="background-image:url(${imgOf(n)});background-size:contain;background-position:center;background-color:#e9eef0"` : n.logo ? `style="background-image:url(${imgOf(n)})" ` : n.contain ? `style="background-image:url(${imgOf(n)});background-size:contain;background-color:#eef2f0" ` : `style="background-image:url(${imgOf(n)})" `;
-const phHtml = n => n.paper ? `<div class="ph paper"><small>${n.kicker||'Revista Abracicon Saber'}</small><b>${n.paper}</b><span>${n.paperSub}</span></div>` : `<div class="ph ${n.logo?'logo':''}" ${phStyle(n)}></div>`;
-const card = (n,cls)=>`<a class="card ${cls}" href="#/noticias" data-n="${n.id}">${phHtml(n)}<div class="tx"><time>${n.label}</time><h3>${n.title}</h3>${cls==='big'?`<p class="muted" style="margin:0">${n.sum}</p>`:''}</div></a>`;
+const esc = s => String(s).replace(/"/g,'&quot;');
 const thumbStyle = n => { const src=imgOf(n); if(n.logo) return `style="background-image:url(${src});background-size:45%;background-repeat:no-repeat;background-position:center;background-color:#fff"`; return `style="background-image:url(${src});background-size:cover;background-position:${n.poster?'top center':'center'}"`; };
-const thumbHtml = n => n.paper ? `<div class="thumb paper"><small>${n.kicker||'Revista Abracicon Saber'}</small><b>${n.paper}</b><span>${n.paperSub}</span></div>` : `<div class="thumb" ${thumbStyle(n)} role="img" aria-label="${(n.alt||n.title).replace(/"/g,'&quot;')}"></div>`;
-const newsRow = n => `<a class="newsrow" href="#/noticias" data-n="${n.id}">${thumbHtml(n)}<div class="nr-tx"><time>${n.label}</time><h3>${n.title}</h3><p>${n.sum}</p></div></a>`;
+const thumbHtml = n => n.paper ? `<div class="thumb paper"><small>${n.kicker||'Revista Abracicon Saber'}</small><b>${n.paper}</b><span>${n.paperSub}</span></div>` : `<div class="thumb" ${thumbStyle(n)} role="img" aria-label="${esc(n.alt||n.title)}"></div>`;
+const newsRow = n => `<a class="newsrow" href="${newsHref(n.id)}">${thumbHtml(n)}<div class="nr-tx"><time>${n.label}</time><h3>${n.title}</h3><p>${n.sum}</p></div></a>`;
 $('#homeNews').innerHTML = NEWS.slice(0,5).map(newsRow).join('');
-const media = n => n.photo ? `<img class="newsphoto" src="${A[n.img]}" alt="${n.alt||n.title}" loading="lazy">` : n.poster ? `<div class="posters">${n.imgs.map(k=>`<img src="${A[k]}" alt="Cartaz de divulgação: ${n.title}" loading="lazy">`).join('')}</div>` : n.paper ? `<div class="paperbox"><small>${n.kicker||'Revista Abracicon Saber'}</small><b>${n.paper}</b><span>${n.paperSub}</span></div>` : `<div class="ph" style="background-image:url(${imgOf(n)});${n.logo?'background-size:30%':n.contain?'background-size:contain;background-color:#eef2f0':'background-size:cover'}"></div>`;
+$('#newsList').innerHTML = `<div class="newslist">${NEWS.map(newsRow).join('')}</div>`;
+const media = n => n.photo ? `<img class="newsphoto" src="${imgOf(n)}" alt="${esc(n.alt||n.title)}" ${n.max?`style="max-width:${n.max}px"`:''}>` : n.poster ? `<div class="posters">${n.imgs.map(k=>`<img src="${A[k]}" alt="Cartaz de divulgação: ${esc(n.title)}" loading="lazy">`).join('')}</div>` : n.paper ? `<div class="paperbox"><small>${n.kicker||'Revista Abracicon Saber'}</small><b>${n.paper}</b><span>${n.paperSub}</span></div>` : '';
 const bodyHtml = n => n.body.map(p=>typeof p==='string'?`<p>${p}</p>`:`<ul>${p.list.map(li=>`<li>${li}</li>`).join('')}</ul>`).join('');
 const linkHtml = n => n.link ? `<p><a class="btn line" href="${n.link}" target="_blank" rel="noopener">Ler o artigo na Abracicon Saber</a></p>` : '';
-$('#newsList').innerHTML = NEWS.map(n=>`<article class="article" id="n-${n.id}"><time class="muted">${n.label}</time><h2>${n.title}</h2>${media(n)}<div class="prose">${bodyHtml(n)}</div>${linkHtml(n)}</article>`).join('');
-$$('#homeNews .newsrow').forEach(c=>c.addEventListener('click',e=>{e.preventDefault();location.hash='#/noticias';setTimeout(()=>{const el=document.getElementById('n-'+c.dataset.n);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},60);}));
+function renderNews(n){
+  $('#nTitle').textContent=n.title; $('#nDate').textContent=n.label;
+  const u=newsUrl(n.id), wa='https://wa.me/?text='+encodeURIComponent(n.title+' '+u);
+  $('#nBody').innerHTML = `${media(n)}<div class="prose">${bodyHtml(n)}</div>${linkHtml(n)}<div class="share"><span>Compartilhar esta notícia</span><button type="button" class="btn line" data-share="copy" data-url="${u}">Copiar link</button><a class="btn line" href="${wa}" target="_blank" rel="noopener">WhatsApp</a></div><p style="margin-top:30px"><a class="btn" href="#/noticias">Ver todas as notícias</a></p>`;
+}
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-share="copy"]'); if(!b) return;
+  const u=b.dataset.url||location.href; let ok=false;
+  try{ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(u);ok=true;} }catch(_){}
+  if(!ok){const ta=document.createElement('textarea');ta.value=u;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{ok=document.execCommand('copy');}catch(_){}ta.remove();}
+  b.textContent=ok?'Link copiado':'Não foi possível copiar'; setTimeout(()=>{b.textContent='Copiar link';},2200);
+});
 
 /* diretoria */
 const initials = n => n.split(' ').filter(w=>w.length>2)[0][0];
@@ -790,12 +921,16 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){has.classList.remov
 
 const GROUP=['quem-somos','objetivos','diretoria','projetos','simbolos','doacoes'];
 function route(){
-  let p=(location.hash.replace(/^#\/?/,'')||'home').split('/')[0];
-  let pg=$(`.page[data-page="${p}"]`); if(!pg){p='home';pg=$('.page[data-page="home"]');}
+  const parts=(location.hash.replace(/^#\/?/,'')||'home').split('/');
+  let p=parts[0]; let item=null;
+  if(p==='noticias'&&parts[1]) item=NEWS.find(n=>n.id===parts[1])||null;
+  let pg=item?$('.page[data-page="noticia"]'):(p==='noticia'?null:$(`.page[data-page="${p}"]`));
+  if(!pg){p='home';pg=$('.page[data-page="home"]');}
+  if(item) renderNews(item);
   $$('.page').forEach(x=>x.classList.toggle('show',x===pg));
   $$('nav.main [data-p]').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
   subBtn.classList.toggle('on',GROUP.includes(p));
-  document.title=(p==='home'?'ATOCCON | Academia Tocantinense de Ciências Contábeis':pg.dataset.title+' | ATOCCON');
+  document.title=item?item.title+' | ATOCCON':(p==='home'?'ATOCCON | Academia Tocantinense de Ciências Contábeis':pg.dataset.title+' | ATOCCON');
   nav.classList.remove('open');burger.setAttribute('aria-expanded',false);has.classList.remove('open');
   window.scrollTo(0,0);
 }
