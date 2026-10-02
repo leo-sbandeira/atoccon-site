@@ -271,6 +271,30 @@ h1.ntitle{font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:30ch;line-height:1.12}
 .share .btn{padding:9px 18px;font-size:15px}
 .viatag{display:inline-block;margin-left:10px;padding:1px 10px;border-radius:99px;background:var(--soft);border:1px solid var(--line);color:var(--ink);font-weight:600;font-size:12.5px;vertical-align:1px}
 .srcbox{margin-top:26px;padding:16px 20px;background:var(--soft);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;max-width:760px;font-size:15.5px}
+.agenda{display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-head b{font-family:var(--serif);font-size:1.3rem;font-weight:600}
+.cal-nav{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:22px;line-height:1;cursor:pointer}
+.cal-nav:hover{background:var(--soft)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal-grid .dow{font-size:12.5px;font-weight:600;color:var(--muted);padding:6px 0}
+.cal-grid .cell{aspect-ratio:1;display:grid;place-items:center;border-radius:50%;font:500 15px var(--sans);color:var(--ink);border:0;background:none;padding:0}
+.cal-grid .cell.empty{visibility:hidden}
+.cal-grid .cell.today{box-shadow:inset 0 0 0 2px var(--cyan)}
+.cal-grid button.cell{cursor:pointer;background:var(--toga);color:#fff;font-weight:700}
+.cal-grid button.cell:hover{filter:brightness(1.15)}
+.cal-grid button.cell.sel{box-shadow:0 0 0 3px var(--gold)}
+.ag-list h3{margin:0 0 14px}
+.ag-item{display:grid;grid-template-columns:78px 1fr;gap:18px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:12px;text-decoration:none;color:inherit}
+a.ag-item:hover h4{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:4px;text-decoration-thickness:2px}
+.ag-date{text-align:center;font-family:var(--serif)}
+.ag-date b{display:block;font-size:2.2rem;font-weight:500;line-height:1}
+.ag-date span{font:600 13px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.ag-tx h4{margin:0;font-family:var(--serif);font-size:1.25rem;font-weight:600;line-height:1.25}
+.ag-tx p{margin:4px 0 0;color:var(--muted);font-size:15.5px}
+.ag-reset{margin-top:6px}
+@media (max-width:860px){.agenda{grid-template-columns:1fr}}
 .posters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0;align-items:start}
 .posters img{border-radius:12px;border:1px solid var(--line);margin:0;width:100%;height:auto}
 .article .ph{border-radius:12px;margin:18px 0;aspect-ratio:16/9;background:#fff center/contain no-repeat;border:1px solid var(--line)}
@@ -355,6 +379,19 @@ footer .legal{border-top:1px solid rgba(255,255,255,.15);margin-top:36px;padding
     <div class="wrap">
       <div class="head-row"><h2>Notícias recentes</h2><a class="btn line" href="#/noticias">Ver todas as notícias</a></div>
       <div class="newslist" id="homeNews"></div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0" id="agenda">
+    <div class="wrap">
+      <div class="head-row"><h2>Agenda</h2></div>
+      <div class="agenda">
+        <div class="cal">
+          <div class="cal-head"><button type="button" class="cal-nav" id="calPrev" aria-label="Mês anterior">&#8249;</button><b id="calTitle" aria-live="polite"></b><button type="button" class="cal-nav" id="calNext" aria-label="Próximo mês">&#8250;</button></div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+        <div class="ag-list"><h3 id="agListTitle">Próximas datas</h3><div id="agList"></div></div>
+      </div>
     </div>
   </section>
 
@@ -646,8 +683,25 @@ const CAD = [{"n": 1, "vac": false, "patrono": "Juscelino Carvalho de Brito", "o
 
 const NEWS = [
  {
+  "id": "atualizacao-cadastral-dos-academicos",
+  "d": "2026-10-02.2",
+  "label": "2 de outubro de 2026",
+  "kicker": "Diretoria da ATOCCON",
+  "paper": "Atualização cadastral",
+  "paperSub": "Formulário de cerca de 5 minutos",
+  "link": "https://forms.gle/QpruNNxDAcqfzyWw5",
+  "linkLabel": "Preencher o formulário",
+  "title": "ATOCCON convoca acadêmicos para atualização cadastral",
+  "sum": "O formulário leva cerca de 5 minutos para ser preenchido.",
+  "body": [
+   "A ATOCCON está atualizando o cadastro do quadro de acadêmicos. Pedimos que cada acadêmico e acadêmica preencha o formulário de atualização cadastral, que leva cerca de 5 minutos.",
+   "Contamos com a colaboração de todos. Obrigado!",
+   "Diretoria da ATOCCON"
+  ]
+ },
+ {
   "id": "convocacao-reuniao-extraordinaria-diretoria",
-  "d": "2026-10-02",
+  "d": "2026-10-02.1",
   "label": "2 de outubro de 2026",
   "kicker": "Ofício ATOCCON/PRES nº 001/2026",
   "paper": "Reunião extraordinária",
@@ -1026,6 +1080,57 @@ $$('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{
   if(!ok) ok=fallbackCopy(txt);
   $('#copied').textContent = ok ? (b.dataset.copy==='key'?'Chave Pix copiada.':'Código Pix copiado.') : 'Não foi possível copiar. Use o QR code ou digite a chave do CNPJ: 33.976.053/0001-00.';
 }));
+
+/* agenda */
+const AGENDA = [
+ {
+  "d": "2026-10-08",
+  "time": "10h",
+  "title": "Reunião Extraordinária da Diretoria",
+  "place": "Google Meet",
+  "news": "convocacao-reuniao-extraordinaria-diretoria"
+ }
+];
+const MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const DOW=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const isoOf=(y,m,d)=>`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+const todayIso=()=>{const t=new Date();return isoOf(t.getFullYear(),t.getMonth(),t.getDate());};
+const fmtLong=iso=>{const [y,m,d]=iso.split('-').map(Number);return `${d} de ${MESES[m-1]} de ${y}`;};
+const evOn=iso=>AGENDA.filter(e=>e.d===iso);
+let calY=new Date().getFullYear(), calM=new Date().getMonth(), calSel=null;
+function agItem(e){
+  const [y,m,d]=e.d.split('-').map(Number);
+  const href=e.news?newsHref(e.news):(e.link||'');
+  const inner=`<div class="ag-date"><b>${String(d).padStart(2,'0')}</b><span>${MESES[m-1].slice(0,3)}</span></div><div class="ag-tx"><h4>${e.title}</h4><p>${[e.time,e.place].filter(Boolean).join(', ')}</p></div>`;
+  return href?`<a class="ag-item" href="${href}"${e.news?'':' target="_blank" rel="noopener"'}>${inner}</a>`:`<div class="ag-item">${inner}</div>`;
+}
+function renderAgList(){
+  const today=todayIso(); let items,title;
+  if(calSel){items=evOn(calSel);title=fmtLong(calSel);}
+  else{items=AGENDA.filter(e=>e.d>=today).sort((a,b)=>a.d.localeCompare(b.d));title='Próximas datas';}
+  $('#agListTitle').textContent=title;
+  let h=items.map(agItem).join('');
+  if(!items.length) h='<p class="muted">Nenhuma data marcada por enquanto.</p>';
+  if(calSel) h+='<button type="button" class="btn line ag-reset" id="agReset">Ver todas as próximas datas</button>';
+  $('#agList').innerHTML=h;
+}
+function renderCal(){
+  $('#calTitle').textContent=MESES[calM][0].toUpperCase()+MESES[calM].slice(1)+' de '+calY;
+  const first=new Date(calY,calM,1).getDay(), days=new Date(calY,calM+1,0).getDate(), today=todayIso();
+  let h=DOW.map(d=>`<span class="dow">${d}</span>`).join('');
+  for(let i=0;i<first;i++) h+='<span class="cell empty"></span>';
+  for(let d=1;d<=days;d++){
+    const iso=isoOf(calY,calM,d), ev=evOn(iso), cls=['cell'];
+    if(iso===today) cls.push('today'); if(iso===calSel) cls.push('sel');
+    h+= ev.length ? `<button type="button" class="${cls.join(' ')}" data-iso="${iso}" aria-pressed="${iso===calSel}" aria-label="${fmtLong(iso)}, ${ev.length} compromisso${ev.length>1?'s':''}">${d}</button>` : `<span class="${cls.join(' ')}">${d}</span>`;
+  }
+  $('#calGrid').innerHTML=h; renderAgList();
+}
+$('#calPrev').addEventListener('click',()=>{calM--; if(calM<0){calM=11;calY--;} renderCal();});
+$('#calNext').addEventListener('click',()=>{calM++; if(calM>11){calM=0;calY++;} renderCal();});
+$('#calGrid').addEventListener('click',e=>{const b=e.target.closest('button.cell'); if(!b) return; calSel=(calSel===b.dataset.iso)?null:b.dataset.iso; renderCal();});
+$('#agList').addEventListener('click',e=>{if(e.target.id==='agReset'){calSel=null;renderCal();}});
+renderCal();
 
 /* navegação */
 const nav=$('#nav'), burger=$('#burger'), has=$('#hasSub'), subBtn=$('#subBtn');
