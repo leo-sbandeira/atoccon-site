@@ -646,6 +646,32 @@ const CAD = [{"n": 1, "vac": false, "patrono": "Juscelino Carvalho de Brito", "o
 
 const NEWS = [
  {
+  "id": "convocacao-reuniao-extraordinaria-diretoria",
+  "d": "2026-10-02",
+  "label": "2 de outubro de 2026",
+  "kicker": "Ofício ATOCCON/PRES nº 001/2026",
+  "paper": "Reunião extraordinária",
+  "paperSub": "8 de outubro de 2026, às 10h",
+  "link": "https://drive.google.com/file/d/1uyiH1ANdMFl9E7aIpAG-7bSv4NOzoQ67/view?usp=sharing",
+  "linkLabel": "Ver o ofício de convocação (PDF)",
+  "title": "Presidência convoca a Diretoria para reunião extraordinária em 8 de outubro",
+  "sum": "Na pauta, as eleições para a gestão 2027-2030, o lançamento da ReCont e o regulamento da revista.",
+  "body": [
+   "A Presidência da ATOCCON convocou os membros da Diretoria para uma reunião extraordinária, marcada para 8 de outubro de 2026, às 10h, por videoconferência no Google Meet. O link será enviado aos membros por e-mail e WhatsApp. A convocação consta do Ofício ATOCCON/PRES nº 001/2026, de 2 de outubro de 2026.",
+   "A pauta tem quatro itens:",
+   {
+    "list": [
+     "Eleições da Diretoria e do Conselho Fiscal para a gestão 2027-2030: definição do calendário eleitoral, do prazo de registro de chapas e dos termos do edital de convocação da Assembleia Geral Extraordinária eleitoral.",
+     "Lançamento da Revista Tocantinense de Ciências Contábeis (ReCont).",
+     "Apreciação e aprovação do Regulamento da ReCont, para posterior submissão à Assembleia Geral.",
+     "Manifestação de membros para o Conselho Editorial e indicação do Editor-Chefe."
+    ]
+   },
+   "A reunião será iniciada pela Presidência com a presença da maioria absoluta dos membros da Diretoria, e as deliberações serão tomadas por maioria simples, com voto de qualidade da Presidência em caso de empate. A eleição da Diretoria e a aprovação de normas complementares serão apreciadas pela Diretoria e depois encaminhadas à Assembleia Geral.",
+   "O membro que não puder comparecer deve justificar a ausência previamente pelo e-mail academiatocantinensecc@gmail.com. A ata será lavrada pela Secretaria da mesa e assinada pela Presidência e pelo(a) Secretário(a), com lista de presença."
+  ]
+ },
+ {
   "id": "capacitacao-novas-diretrizes-curriculares",
   "d": "2025-10-13",
   "label": "Junho a outubro de 2025",
@@ -909,7 +935,7 @@ $('#newsList').innerHTML = `<div class="newslist">${NEWS.map(newsRow).join('')}<
 const media = n => n.photo ? `<img class="newsphoto" src="${imgOf(n)}" alt="${esc(n.alt||n.title)}" ${n.max?`style="max-width:${n.max}px"`:''}>` : n.poster ? `<div class="posters">${n.imgs.map(k=>`<img src="${A[k]}" alt="Cartaz de divulgação: ${esc(n.title)}" loading="lazy">`).join('')}</div>` : n.paper ? `<div class="paperbox"><small>${n.kicker||'Revista Abracicon Saber'}</small><b>${n.paper}</b><span>${n.paperSub}</span></div>` : '';
 const bodyHtml = n => n.body.map(p=>typeof p==='string'?`<p>${p}</p>`:`<ul>${p.list.map(li=>`<li>${li}</li>`).join('')}</ul>`).join('');
 const srcHtml = n => n.source ? `<div class="srcbox">${n.repost?`Matéria publicada originalmente no site do ${n.source.name} em ${n.source.date}.`:`Com informações da matéria publicada pelo ${n.source.name} em ${n.source.date}.`} <a href="${n.source.url}" target="_blank" rel="noopener">Ler no site do ${n.source.name}</a></div>` : '';
-const linkHtml = n => n.link ? `<p><a class="btn line" href="${n.link}" target="_blank" rel="noopener">Ler o artigo na Abracicon Saber</a></p>` : '';
+const linkHtml = n => n.link ? `<p><a class="btn line" href="${n.link}" target="_blank" rel="noopener">${n.linkLabel||'Ler o artigo na Abracicon Saber'}</a></p>` : '';
 function renderNews(n){
   $('#nTitle').textContent=n.title; $('#nDate').innerHTML=n.label+(n.repost?`<span class="viatag">Repostagem do ${n.source.name}</span>`:'');
   const u=newsUrl(n.id), wa='https://wa.me/?text='+encodeURIComponent(n.title+' '+u);
