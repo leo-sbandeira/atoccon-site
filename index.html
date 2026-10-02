@@ -939,8 +939,10 @@ const DIR23 = [
  {n:'Leonardo dos Santos Bandeira',r:'1º Diretor de Administração e Finanças',c:30,p:'p30'},
  {n:'Eendrik Lima Gomes',r:'2º Diretor de Administração e Finanças',c:23,p:'p23'},
  {n:'Juscelino Carvalho de Brito',r:'1º Diretor Operacional',c:1,p:'p1'},
+ {vago:true,r:'2º Diretor Operacional'},
  {n:'Mônica de Souza Lima',r:'1ª Diretora de Ensino e Pesquisa',c:24,p:'p24'},
- {n:'Karrário Ferreira da Silva',r:'2º Diretor de Ensino e Pesquisa',c:13,p:'p13'}
+ {n:'Karrário Ferreira da Silva',r:'2º Diretor de Ensino e Pesquisa',c:13,p:'p13'},
+ {vago:true,r:'3º Diretor de Ensino e Pesquisa'}
 ];
 const FISC23 = [
  {n:'Vilmar Custódio Biangulo',r:'Conselheiro fiscal efetivo',c:5,p:'p5'},
@@ -1005,7 +1007,7 @@ document.addEventListener('click',async e=>{
 
 /* diretoria */
 const initials = n => n.split(' ').filter(w=>w.length>2)[0][0];
-const person = x => `<div class="person"><div class="im" ${x.p?`style="background-image:url(${A[x.p]})" role="img" aria-label="Foto de ${x.n}"`:''}>${x.p?'':initials(x.n)}</div><div class="tx"><b>${x.n}</b><span class="role">${x.r}</span><small>Cátedra ${x.c}</small></div></div>`;
+const person = x => x.vago ? `<div class="person" style="background:var(--surface);border:2px dashed var(--line)"><div class="im" style="background:none"></div><div class="tx"><b style="color:var(--muted)">Cargo vago</b><span class="role">${x.r}</span></div></div>` : `<div class="person"><div class="im" ${x.p?`style="background-image:url(${A[x.p]})" role="img" aria-label="Foto de ${x.n}"`:''}>${x.p?'':initials(x.n)}</div><div class="tx"><b>${x.n}</b><span class="role">${x.r}</span><small>Cátedra ${x.c}</small></div></div>`;
 $('#dirNow').innerHTML = DIR23.map(person).join('');
 $('#fiscNow').innerHTML = FISC23.map(person).join('');
 $('#dirPeople').innerHTML = DIR.map(person).join('');
