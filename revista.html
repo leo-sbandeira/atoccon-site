@@ -106,6 +106,13 @@ ul.pessoas li{padding:10px 0; border-bottom:1px solid var(--margem)}
 ul.pessoas li:last-child{border-bottom:0}
 ul.pessoas b{display:block; font-weight:600}
 ul.pessoas span{font-size:15px; opacity:.85}
+/* Largura alinhada ao cabeçalho e Conselho em um só bloco */
+.lead{max-width:none}
+.fatos{grid-template-columns:repeat(3, 1fr)}
+.conselho1 ul.dupla{display:grid; grid-template-columns:repeat(2, 1fr); column-gap:32px}
+.conselho1 ul.dupla li:nth-last-child(2){border-bottom:0}
+@media (max-width:760px){.fatos{grid-template-columns:1fr 1fr}.conselho1 ul.dupla{grid-template-columns:1fr}.conselho1 ul.dupla li:nth-last-child(2){border-bottom:1px solid var(--margem)}}
+@media (max-width:480px){.fatos{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -162,6 +169,24 @@ ul.pessoas span{font-size:15px; opacity:.85}
       <div class="fato"><b>Periodicidade semestral</b>Com publicação contínua e fechamento dos números em junho e dezembro.</div>
       <div class="fato"><b>Licença CC BY 4.0</b>Os autores mantêm os direitos autorais.</div>
       <div class="fato"><b>Três idiomas</b>Português, inglês e espanhol.</div>
+    </div>
+
+    <h3 style="margin-top:40px">Conselho Editorial</h3>
+    <div class="cartao conselho1">
+      <h4>Editora-chefe</h4>
+      <ul class="pessoas">
+        <li><b>Dra. Gisele Leite Padilha</b><span>Cátedra 28</span></li>
+      </ul>
+      <h4 style="margin-top:18px">Editores adjuntos</h4>
+      <ul class="pessoas dupla">
+        <li><b>Me. Leonardo dos Santos Bandeira</b><span>Cátedra 30</span></li>
+        <li><b>Me. Karrário Ferreira da Silva</b><span>Cátedra 13</span></li>
+        <li><b>Dra. Cláudia da Luz Carvelli</b><span>Cátedra 11</span></li>
+        <li><b>Me. Patricia Pinheiro Alves Feitosa</b><span>Cátedra 18</span></li>
+        <li><b>Me. Rúbia Caetano Cardoso</b><span>Cátedra 10</span></li>
+        <li><b>Me. Washington Moura Leal</b><span>Cátedra 6</span></li>
+      </ul>
+      <p class="pequeno" style="margin:14px 0 0">A composição do Corpo Editorial Científico e do Banco de Pareceristas será divulgada nesta página.</p>
     </div>
 
     <h3 style="margin-top:40px">Linhas temáticas</h3>
@@ -277,27 +302,6 @@ ul.pessoas span{font-size:15px; opacity:.85}
   <div class="wrap">
     <h2>Edições</h2>
     <p class="lead">O primeiro número está em preparação. As edições publicadas aparecerão aqui, com os artigos em PDF e acesso aberto.</p>
-    <h3 style="margin-top:32px">Conselho Editorial</h3>
-    <div class="conselho">
-      <div class="cartao">
-        <h4>Editora-chefe</h4>
-        <ul class="pessoas">
-          <li><b>Dra. Gisele Leite Padilha</b><span>Cátedra 28</span></li>
-        </ul>
-      </div>
-      <div class="cartao">
-        <h4>Editores adjuntos</h4>
-        <ul class="pessoas">
-          <li><b>Me. Leonardo dos Santos Bandeira</b><span>Cátedra 30</span></li>
-          <li><b>Me. Karrário Ferreira da Silva</b><span>Cátedra 13</span></li>
-          <li><b>Dra. Cláudia da Luz Carvelli</b><span>Cátedra 11</span></li>
-          <li><b>Me. Patricia Pinheiro Alves Feitosa</b><span>Cátedra 18</span></li>
-          <li><b>Me. Rúbia Caetano Cardoso</b><span>Cátedra 10</span></li>
-          <li><b>Me. Washington Moura Leal</b><span>Cátedra 6</span></li>
-        </ul>
-      </div>
-    </div>
-    <p class="pequeno" style="margin-top:16px">A composição do Corpo Editorial Científico e do Banco de Pareceristas será divulgada nesta página.</p>
   </div>
 </section>
 
