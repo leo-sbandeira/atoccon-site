@@ -95,6 +95,17 @@ footer p{margin:0 0 8px; font-size:15px}
   .hero{padding:40px 0 52px}
   section{padding:40px 0}
 }
+
+/* Ajustes: texto justificado, fatos centralizados e Conselho Editorial */
+#sobre .lead, #contribuicoes .lead, #avaliacao .lead{text-align:justify; hyphens:auto; -webkit-hyphens:auto}
+.fato{text-align:center}
+.conselho{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-top:16px; align-items:start}
+.conselho h4{font-family:var(--serif); color:var(--rio); font-size:20px; margin:0 0 6px; font-weight:600}
+ul.pessoas{list-style:none; margin:0; padding:0}
+ul.pessoas li{padding:10px 0; border-bottom:1px solid var(--margem)}
+ul.pessoas li:last-child{border-bottom:0}
+ul.pessoas b{display:block; font-weight:600}
+ul.pessoas span{font-size:15px; opacity:.85}
 </style>
 </head>
 <body>
@@ -120,7 +131,7 @@ footer p{margin:0 0 8px; font-size:15px}
         <li><a href="#avaliacao">Avaliação</a></li>
         <li><a href="#edicoes">Edições</a></li>
         <li><a href="#contato">Contato</a></li>
-        <li><a class="site" href="https://atoccon.org.br/">Site da Atoccon</a></li>
+        <li><a class="site" href="https://atoccon.org.br/" target="_blank" rel="noopener">Site da Atoccon</a></li>
       </ul>
     </nav>
   </div>
@@ -133,9 +144,9 @@ footer p{margin:0 0 8px; font-size:15px}
     <h1>Revista Tocantinense de Ciências Contábeis</h1>
     <p>Revista técnico-científica da Academia Tocantinense de Ciências Contábeis (Atoccon). Pesquisa, ensino e prática contábil, com atenção ao Tocantins e à Amazônia Legal. Acesso aberto e sem taxas.</p>
     <div class="botoes">
-      <a class="btn btn-sol" href="https://forms.gle/fAjMvouN8CUXmand7">Submeter manuscrito</a>
-      <a class="btn btn-linha" href="https://drive.google.com/drive/folders/14ftNBm3VovS5qYs2hWTp6ES2C-oiqtoO?usp=sharing">Modelos para autores</a>
-      <a class="btn btn-linha" href="regulamento-recont.pdf">Regulamento (PDF)</a>
+      <a class="btn btn-sol" href="https://forms.gle/fAjMvouN8CUXmand7" target="_blank" rel="noopener">Submeter manuscrito</a>
+      <a class="btn btn-linha" href="https://drive.google.com/drive/folders/14ftNBm3VovS5qYs2hWTp6ES2C-oiqtoO?usp=sharing" target="_blank" rel="noopener">Modelos para autores</a>
+      <a class="btn btn-linha" href="regulamento-recont.pdf" target="_blank" rel="noopener">Regulamento (PDF)</a>
     </div>
   </div>
 </div>
@@ -207,13 +218,13 @@ footer p{margin:0 0 8px; font-size:15px}
     <h2>Como submeter</h2>
     <ol class="passos">
       <li><div><b>Leia o Regulamento e as Diretrizes.</b> Eles trazem as regras de ineditismo, autoria, avaliação, ética e uso de inteligência artificial.</div></li>
-      <li><div><b>Baixe os modelos.</b> Modelo de manuscrito em Word, Folha de Identificação e Declaração de Submissão, Autoria e Conflito de Interesses, na <a href="https://drive.google.com/drive/folders/14ftNBm3VovS5qYs2hWTp6ES2C-oiqtoO?usp=sharing">pasta de modelos para autores</a>.</div></li>
+      <li><div><b>Baixe os modelos.</b> Modelo de manuscrito em Word, Folha de Identificação e Declaração de Submissão, Autoria e Conflito de Interesses, na <a href="https://drive.google.com/drive/folders/14ftNBm3VovS5qYs2hWTp6ES2C-oiqtoO?usp=sharing" target="_blank" rel="noopener">pasta de modelos para autores</a>.</div></li>
       <li><div><b>Prepare o manuscrito anônimo.</b> Sem nomes de autores, instituições, agradecimentos ou fomento, no texto e nas propriedades do arquivo.</div></li>
-      <li><div><b>Preencha o <a href="https://forms.gle/fAjMvouN8CUXmand7">formulário de submissão</a>.</b> Ele pede que você entre com uma conta Google para enviar os arquivos: manuscrito, folha de identificação e declaração assinada.</div></li>
+      <li><div><b>Preencha o <a href="https://forms.gle/fAjMvouN8CUXmand7" target="_blank" rel="noopener">formulário de submissão</a>.</b> Ele pede que você entre com uma conta Google para enviar os arquivos: manuscrito, folha de identificação e declaração assinada.</div></li>
       <li><div><b>Acompanhe por e-mail.</b> Você recebe uma cópia das respostas. A triagem formal é feita em até 5 dias úteis.</div></li>
     </ol>
     <div class="botoes" style="margin-top:28px">
-      <a class="btn btn-sol" href="https://forms.gle/fAjMvouN8CUXmand7">Ir para o formulário</a>
+      <a class="btn btn-sol" href="https://forms.gle/fAjMvouN8CUXmand7" target="_blank" rel="noopener">Ir para o formulário</a>
     </div>
   </div>
 </section>
@@ -236,7 +247,7 @@ footer p{margin:0 0 8px; font-size:15px}
         </tbody>
       </table>
     </div>
-    <div class="aviso">O texto completo das regras está no <a href="regulamento-recont.pdf">Regulamento da ReCont (PDF)</a>. Em caso de divergência, vale o Regulamento.</div>
+    <div class="aviso">O texto completo das regras está no <a href="regulamento-recont.pdf" target="_blank" rel="noopener">Regulamento da ReCont (PDF)</a>. Em caso de divergência, vale o Regulamento.</div>
   </div>
 </section>
 
@@ -267,7 +278,26 @@ footer p{margin:0 0 8px; font-size:15px}
     <h2>Edições</h2>
     <p class="lead">O primeiro número está em preparação. As edições publicadas aparecerão aqui, com os artigos em PDF e acesso aberto.</p>
     <h3 style="margin-top:32px">Conselho Editorial</h3>
-    <p>A composição do Conselho Editorial, do Corpo Editorial Científico e do Banco de Pareceristas será divulgada nesta página.</p>
+    <div class="conselho">
+      <div class="cartao">
+        <h4>Editora-chefe</h4>
+        <ul class="pessoas">
+          <li><b>Dra. Gisele Leite Padilha</b><span>Cátedra 28</span></li>
+        </ul>
+      </div>
+      <div class="cartao">
+        <h4>Editores adjuntos</h4>
+        <ul class="pessoas">
+          <li><b>Me. Leonardo dos Santos Bandeira</b><span>Cátedra 30</span></li>
+          <li><b>Me. Karrário Ferreira da Silva</b><span>Cátedra 13</span></li>
+          <li><b>Dra. Cláudia da Luz Carvelli</b><span>Cátedra 11</span></li>
+          <li><b>Me. Patricia Pinheiro Alves Feitosa</b><span>Cátedra 18</span></li>
+          <li><b>Me. Rúbia Caetano Cardoso</b><span>Cátedra 10</span></li>
+          <li><b>Me. Washington Moura Leal</b><span>Cátedra 6</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="pequeno" style="margin-top:16px">A composição do Corpo Editorial Científico e do Banco de Pareceristas será divulgada nesta página.</p>
   </div>
 </section>
 
@@ -287,7 +317,7 @@ footer p{margin:0 0 8px; font-size:15px}
       <p>Publicação da Academia Tocantinense de Ciências Contábeis (Atoccon).</p>
     </div>
     <div>
-      <p><a href="https://atoccon.org.br/">Voltar ao site da Atoccon</a></p>
+      <p><a href="https://atoccon.org.br/" target="_blank" rel="noopener">Voltar ao site da Atoccon</a></p>
       <p class="pequeno">Os artigos são publicados sob a licença Creative Commons Attribution 4.0 International (CC BY 4.0).</p>
     </div>
   </div>
