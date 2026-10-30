@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ReCont: Revista Tocantinense de Ciências Contábeis | Atoccon</title>
 <meta name="description" content="ReCont, revista técnico-científica da Academia Tocantinense de Ciências Contábeis (Atoccon). Acesso aberto, sem taxas, avaliação duplo-cega por pares. Submeta seu manuscrito.">
+<link rel="canonical" href="https://atoccon.org.br/revista.html">
+<link rel="icon" type="image/png" href="favicon.png">
 <meta property="og:title" content="ReCont: Revista Tocantinense de Ciências Contábeis">
 <meta property="og:description" content="Revista técnico-científica da Atoccon. Acesso aberto e sem taxas de submissão ou publicação.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://atoccon.org.br/revista.html">
+<meta property="og:image" content="https://atoccon.org.br/og-revista.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -35,6 +39,8 @@ a:hover{color:#093643}
 nav ul{list-style:none; display:flex; flex-wrap:wrap; gap:4px 18px; margin:0; padding:0}
 nav a{color:var(--papel); text-decoration:none; font-size:15px; font-weight:500; padding:8px 0; display:inline-block}
 nav a:hover{color:var(--sol); text-decoration:underline}
+nav a.site{border:1px solid var(--papel); border-radius:6px; padding:6px 12px}
+nav a.site:hover{background:var(--papel); color:var(--rio); text-decoration:none}
 
 /* Abertura */
 .hero{background:var(--rio); color:var(--papel); padding:56px 0 72px; border-bottom:8px solid var(--sol)}
@@ -53,10 +59,8 @@ section:nth-of-type(even){background:var(--branco)}
 h2{font-family:var(--serif); color:var(--rio); font-size:clamp(28px, 4vw, 36px); line-height:1.2; margin:0 0 20px; font-weight:600}
 h3{font-family:var(--serif); color:var(--rio); font-size:22px; margin:0 0 8px; font-weight:600}
 .lead{font-size:19px; max-width:760px}
-.cartoes{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:24px}
 .cartao{background:var(--branco); border:1px solid var(--margem); padding:20px; border-radius:6px}
 section:nth-of-type(even) .cartao{background:var(--papel)}
-.cartao p{margin:0}
 .fatos{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; margin-top:28px}
 .fato{border-top:4px solid var(--sol); padding-top:10px}
 .fato b{display:block; font-family:var(--serif); font-size:21px; color:var(--rio)}
@@ -116,6 +120,7 @@ footer p{margin:0 0 8px; font-size:15px}
         <li><a href="#avaliacao">Avaliação</a></li>
         <li><a href="#edicoes">Edições</a></li>
         <li><a href="#contato">Contato</a></li>
+        <li><a class="site" href="https://atoccon.org.br/">Site da Atoccon</a></li>
       </ul>
     </nav>
   </div>
@@ -282,7 +287,7 @@ footer p{margin:0 0 8px; font-size:15px}
       <p>Publicação da Academia Tocantinense de Ciências Contábeis (Atoccon).</p>
     </div>
     <div>
-      <p><a href="https://atoccon.org.br">Voltar ao site da Atoccon</a></p>
+      <p><a href="https://atoccon.org.br/">Voltar ao site da Atoccon</a></p>
       <p class="pequeno">Os artigos são publicados sob a licença Creative Commons Attribution 4.0 International (CC BY 4.0).</p>
     </div>
   </div>
