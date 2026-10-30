@@ -683,6 +683,33 @@ const CAD = [{"n": 1, "vac": false, "patrono": "Juscelino Carvalho de Brito", "o
 
 const NEWS = [
  {
+  "id": "start-contabil-1-encontro-das-jovens-liderancas-contabeis",
+  "d": "2026-10-30",
+  "label": "30 de outubro de 2026",
+  "repost": true,
+  "source": {
+   "name": "CRCTO",
+   "date": "",
+   "url": "https://crcto.org.br/event/start-contabil-1o-encontro-das-jovens-liderancas-contabeis-do-tocantins/"
+  },
+  "kicker": "CRCTO, com apoio da ATOCCON",
+  "paper": "START CONTÁBIL",
+  "paperSub": "31 de outubro de 2026, das 8h às 18h, em Palmas",
+  "link": "https://www.even3.com.br/start-contabil-779774",
+  "linkLabel": "Inscrições no Even3",
+  "title": "START CONTÁBIL, 1º Encontro das Jovens Lideranças Contábeis do Tocantins, acontece em 31 de outubro",
+  "sum": "Encontro do CRCTO, com apoio da ATOCCON, será em Palmas, das 8h às 18h.",
+  "body": [
+   "O CRCTO realiza no dia 31 de outubro, sábado, o START CONTÁBIL, 1º Encontro das Jovens Lideranças Contábeis do Tocantins. O evento acontece em Palmas, das 8h às 18h, e conta com o apoio da ATOCCON.",
+   "As inscrições são feitas pela plataforma Even3, no botão abaixo. Mais informações estão na página do evento, no site do CRCTO."
+  ],
+  "og": {
+   "kicker": "Repostagem do CRCTO",
+   "title": "START CONTÁBIL",
+   "sub": "31 de outubro de 2026, em Palmas"
+  }
+ },
+ {
   "id": "atualizacao-cadastral-dos-academicos",
   "d": "2026-10-02.2",
   "label": "2 de outubro de 2026",
@@ -724,6 +751,33 @@ const NEWS = [
    "A reunião será iniciada pela Presidência com a presença da maioria absoluta dos membros da Diretoria, e as deliberações serão tomadas por maioria simples, com voto de qualidade da Presidência em caso de empate. A eleição da Diretoria e a aprovação de normas complementares serão apreciadas pela Diretoria e depois encaminhadas à Assembleia Geral.",
    "O membro que não puder comparecer deve justificar a ausência previamente pelo e-mail academiatocantinensecc@gmail.com. A ata será lavrada pela Secretaria da mesa e assinada pela Presidência e pelo(a) Secretário(a), com lista de presença."
   ]
+ },
+ {
+  "id": "iii-encontro-da-mulher-contabilista-liderancas-que-transformam",
+  "d": "2026-10-01",
+  "label": "1 de outubro de 2026",
+  "repost": true,
+  "source": {
+   "name": "CRCTO",
+   "date": "1 de outubro de 2026",
+   "url": "https://crcto.org.br/iii-encontro-da-mulher-contabilista-do-crcto-debate-a-forca-das-liderancas-que-transformam-em-dia-de-imersao-e-conhecimento/"
+  },
+  "kicker": "CRCTO Mulher, com apoio da ATOCCON",
+  "paper": "III Encontro da Mulher Contabilista",
+  "paperSub": "Lideranças que transformam, 30 de setembro de 2026",
+  "title": "III Encontro da Mulher Contabilista reúne a classe contábil em dia de imersão sobre lideranças que transformam",
+  "sum": "Evento do CRCTO, com apoio da ATOCCON e do Sebrae, teve palestras e painéis sobre liderança, imagem profissional e inteligência artificial.",
+  "body": [
+   "O III Encontro da Mulher Contabilista, promovido pelo CRCTO, foi realizado na quarta-feira, 30 de setembro, com o tema “Lideranças que transformam”. O dia reuniu palestras, painéis e troca de experiências sobre os rumos da contabilidade, o empreendedorismo e o papel da mulher no mercado. A organização foi da Comissão CRCTO Mulher, coordenada pela contadora Lédyce Nóbrega, com o apoio da Câmara de Desenvolvimento Profissional do conselho, cuja vice-presidente é Thais Bandeira.",
+   "A programação começou às 9h. A palestra de abertura, “Liderança Transformadora: o poder da gestão com propósito”, foi de Mônica Bueno. Em seguida, o Painel I tratou de empreender em casal na contabilidade, com mediação de Lédyce Nóbrega e a participação de Sadrak Freitas, Jéssica Iane, Fabio Costa e Lubia Rivas.",
+   "À tarde, o Painel II abordou marketing de autoridade e imagem para líderes, com Mariana Lopes e Keiliane Coimbra e mediação de Poli Costa. Mariane Vieira falou sobre liderança feminina e transformação do mercado, e Jessica Landfeldt encerrou as palestras com o tema tecnologia e humanização na liderança de equipes na era da inteligência artificial. O evento terminou às 18h, com sorteios.",
+   "O CRCTO agradeceu aos parceiros Sebrae e ATOCCON, cujo apoio viabilizou o encontro."
+  ],
+  "og": {
+   "kicker": "Repostagem do CRCTO",
+   "title": "III Encontro da Mulher Contabilista",
+   "sub": "Lideranças que transformam"
+  }
  },
  {
   "id": "capacitacao-novas-diretrizes-curriculares",
@@ -990,7 +1044,7 @@ $('#homeNews').innerHTML = NEWS.slice(0,5).map(newsRow).join('');
 $('#newsList').innerHTML = `<div class="newslist">${NEWS.map(newsRow).join('')}</div>`;
 const media = n => n.photo ? `<img class="newsphoto" src="${imgOf(n)}" alt="${esc(n.alt||n.title)}" ${n.max?`style="max-width:${n.max}px"`:''}>` : n.poster ? `<div class="posters">${n.imgs.map(k=>`<img src="${A[k]}" alt="Cartaz de divulgação: ${esc(n.title)}" loading="lazy">`).join('')}</div>` : n.paper ? `<div class="paperbox"><small>${n.kicker||'Revista Abracicon Saber'}</small><b>${n.paper}</b><span>${n.paperSub}</span></div>` : '';
 const bodyHtml = n => n.body.map(p=>typeof p==='string'?`<p>${p}</p>`:`<ul>${p.list.map(li=>`<li>${li}</li>`).join('')}</ul>`).join('');
-const srcHtml = n => n.source ? `<div class="srcbox">${n.repost?`Matéria publicada originalmente no site do ${n.source.name} em ${n.source.date}.`:`Com informações da matéria publicada pelo ${n.source.name} em ${n.source.date}.`} <a href="${n.source.url}" target="_blank" rel="noopener">Ler no site do ${n.source.name}</a></div>` : '';
+const srcHtml = n => n.source ? `<div class="srcbox">${n.repost?`Matéria publicada originalmente no site do ${n.source.name}${n.source.date?' em '+n.source.date:''}.`:`Com informações da matéria publicada pelo ${n.source.name} em ${n.source.date}.`} <a href="${n.source.url}" target="_blank" rel="noopener">Ler no site do ${n.source.name}</a></div>` : '';
 const linkHtml = n => n.link ? `<p><a class="btn line" href="${n.link}" target="_blank" rel="noopener">${n.linkLabel||'Ler o artigo na Abracicon Saber'}</a></p>` : '';
 function renderNews(n){
   $('#nTitle').textContent=n.title; $('#nDate').innerHTML=n.label+(n.repost?`<span class="viatag">Repostagem do ${n.source.name}</span>`:'');
@@ -1091,6 +1145,13 @@ const AGENDA = [
   "title": "Reunião Extraordinária da Diretoria",
   "place": "Google Meet",
   "news": "convocacao-reuniao-extraordinaria-diretoria"
+ },
+ {
+  "d": "2026-10-31",
+  "time": "8h às 18h",
+  "title": "START CONTÁBIL, 1º Encontro das Jovens Lideranças Contábeis do Tocantins",
+  "place": "Palmas",
+  "news": "start-contabil-1-encontro-das-jovens-liderancas-contabeis"
  }
 ];
 const MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
