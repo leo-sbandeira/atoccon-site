@@ -329,6 +329,11 @@ footer .legal{border-top:1px solid rgba(255,255,255,.15);margin-top:36px;padding
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 /* Notícias: texto ocupa toda a largura do conteúdo */
 #nBody .prose,#nBody .share,#nBody .paperbox,#nBody .newsphoto,#nBody .srcbox{max-width:none}
+/* Notícias: título e imagens centralizados */
+.pagehead:has(#nTitle){text-align:center}
+.pagehead:has(#nTitle) .ntitle{max-width:none;margin-inline:auto}
+#nBody .posters{justify-content:center}
+#nBody .newsphoto,#nBody .article img{margin-inline:auto}
 </style>
 </head>
 <body>
